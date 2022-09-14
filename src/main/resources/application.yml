@@ -1,0 +1,45 @@
+spring:
+  profiles:
+    active: local
+
+  datasource:
+    url: jdbc:mariadb://localhost:3306/heech_member_db?allowPublicKeyRetrieval=true&useSSL=false
+    username: heech_user
+    password: heech_pass
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #        show_sql: true
+        format_sql: true
+        ues_sql_comment: true
+        default_batch_fetch_size: 1000
+    open-in-view: true
+
+  messages:
+    basename: messages,errors
+
+  thymeleaf:
+    cache: false
+    template-resolver-order: 0
+
+server:
+  port: 9001
+  servlet:
+    session:
+      tracking-modes: cookie
+  error:
+    path: /common/error
+    include-exception: false
+    include-stacktrace: never
+    include-binding-errors: never
+    whitelabel:
+      enabled: true
+
+logging:
+  level:
+    root: info
+    org.hibernate.SQL: debug
