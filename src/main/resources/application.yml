@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: local
 
   datasource:
     url: jdbc:mariadb://localhost:3306/heech_member_db?allowPublicKeyRetrieval=true&useSSL=false
@@ -22,22 +20,8 @@ spring:
   messages:
     basename: messages,errors
 
-  thymeleaf:
-    cache: false
-    template-resolver-order: 0
-
 server:
   port: 9001
-  servlet:
-    session:
-      tracking-modes: cookie
-  error:
-    path: /common/error
-    include-exception: false
-    include-stacktrace: never
-    include-binding-errors: never
-    whitelabel:
-      enabled: true
 
 logging:
   level:
