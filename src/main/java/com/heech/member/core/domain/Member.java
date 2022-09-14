@@ -1,6 +1,7 @@
 package com.heech.member.core.domain;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "member")
@@ -10,10 +11,26 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    private String name;
-
+    //로그임정보
     private String loginId;
     private String password;
+    private String name;
     private String email;
-    private String birth;
+
+    //개인정보
+    private String birthday;
+    private String gender;
+    private String mobile;
+    private String address;
+    private String profileImage;
+
+    //잠김
+    private boolean isLock;
+    private int lockCount;
+    private LocalDateTime lastLockedDate;
+
+    //휴먼여부
+    private boolean isDormancy;
+    private LocalDateTime lastDormancyDate;
+
 }
