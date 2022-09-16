@@ -28,10 +28,16 @@ public class Member {
     @Column(length = 60)
     private String email;
 
+    //권한정보
+    @Enumerated(EnumType.STRING)
+    @Column(length = 15)
+    private Role role;
+
     //개인정보
     @Column(length = 8)
     private String birthday;
     @Enumerated(EnumType.STRING)
+    @Column(length = 15)
     private Gender gender;
     @Embedded
     private Mobile mobile;
@@ -56,7 +62,7 @@ public class Member {
     //===생성===//
     /** 회원 생성 */
     @Builder(builderClassName = "createMemberBuilder", builderMethodName = "createMemberBuilder")
-    public Member(String loginId, String password, String name, String email, String birthday, Gender gender, Mobile mobile, Address address, String profileImage) {
+    public Member(String loginId, String password, String name, String email, Role role, String birthday, Gender gender, Mobile mobile, Address address, String profileImage) {
         Assert.hasText(name, "name은 필수값입니다.");
         Assert.hasText(loginId, "loginId는 필수값입니다.");
         Assert.hasText(password, "password는 필수값입니다.");
@@ -66,6 +72,7 @@ public class Member {
         this.password = password;
         this.name = name;
         this.email = email;
+        this.role = role;
         this.birthday = birthday;
         this.gender = gender;
         this.mobile = mobile;
