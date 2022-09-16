@@ -21,7 +21,7 @@ spring:
     basename: messages,errors
 
 server:
-  port: 9001
+  port: 10001
 
 logging:
   level:

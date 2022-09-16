@@ -15,4 +15,26 @@ public class MemberService {
 
     private final MemberQueryRepository memberQueryRepository;
     private final MemberRepository memberRepository;
+
+    /**
+     * 회원 목록 조회
+     */
+
+    /**
+     * 회원 단건 조회
+     */
+
+    /**
+     * 회원 저장
+     */
+
+    /**
+     * 회원 수정
+     */
+
+    /**
+     * 회원 삭제
+     */
+
+
 }
