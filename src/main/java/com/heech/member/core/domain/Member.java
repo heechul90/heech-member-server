@@ -1,6 +1,8 @@
 package com.heech.member.core.domain;
 
+import com.heech.member.core.dto.UpdateMemberParam;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 
@@ -53,6 +55,7 @@ public class Member {
 
     //===생성===//
     /** 회원 생성 */
+    @Builder(builderClassName = "createMemberBuilder", builderMethodName = "createMemberBuilder")
     public Member(String loginId, String password, String name, String email, String birthday, Gender gender, Mobile mobile, Address address, String profileImage) {
         Assert.hasText(name, "name은 필수값입니다.");
         Assert.hasText(loginId, "loginId는 필수값입니다.");
@@ -77,7 +80,12 @@ public class Member {
         this.signinDate = LocalDateTime.now();
     }
 
-    /** 회원 수정 */
+    /**
+     * 회원 수정
+     */
+    public void updateMember(UpdateMemberParam param) {
+
+    }
 
     //===변경===//
     public void changePassword(String password) {
