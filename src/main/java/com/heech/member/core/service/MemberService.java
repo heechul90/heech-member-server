@@ -5,6 +5,7 @@ import com.heech.member.core.dto.MemberSearchCondition;
 import com.heech.member.core.dto.UpdateMemberParam;
 import com.heech.member.core.repository.MemberQueryRepository;
 import com.heech.member.core.repository.MemberRepository;
+import com.heech.member.exception.EntityNotFound;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -12,14 +13,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.NoSuchElementException;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class MemberService {
 
+    public static final String ENTITY_NAME = "member";
     private final MemberQueryRepository memberQueryRepository;
     private final MemberRepository memberRepository;
 
@@ -35,7 +35,7 @@ public class MemberService {
      */
     public Member findMember(Long memberId) {
         return memberRepository.findById(memberId)
-                .orElseThrow(() -> new NoSuchElementException());
+                .orElseThrow(() -> new EntityNotFound(ENTITY_NAME, memberId));
     }
 
     /**
@@ -52,7 +52,7 @@ public class MemberService {
     @Transactional
     public void updateMember(Long memberId, UpdateMemberParam param) {
         Member findMember = memberRepository.findById(memberId)
-                .orElseThrow(() -> new NoSuchElementException());
+                .orElseThrow(() -> new EntityNotFound(ENTITY_NAME, memberId));
         findMember.updateMember(param);
     }
 
@@ -62,7 +62,7 @@ public class MemberService {
     @Transactional
     public void deleteMember(Long memberId) {
         Member findMember = memberRepository.findById(memberId)
-                .orElseThrow(() -> new NoSuchElementException());
+                .orElseThrow(() -> new EntityNotFound(ENTITY_NAME, memberId));
         memberRepository.delete(findMember);
     }
 }
