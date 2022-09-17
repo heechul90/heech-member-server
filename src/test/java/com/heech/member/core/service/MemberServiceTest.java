@@ -9,6 +9,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 @ExtendWith(MockitoExtension.class)
 class MemberServiceTest {
 
@@ -51,7 +58,15 @@ class MemberServiceTest {
 
     @Test
     void findMember() {
+        //given
         Member member = getMember(LOGIN_ID, PASSWORD, NAME, EMAIL, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS);
+        given(memberRepository.findById(any(Long.class))).willReturn(Optional.ofNullable(member));
+
+        //when
+
+        //then
+
+        //verify
     }
 
     @Test
