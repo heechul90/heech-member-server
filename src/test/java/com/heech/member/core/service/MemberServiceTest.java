@@ -183,8 +183,18 @@ class MemberServiceTest {
         memberService.updateMember(any(Long.class), param);
 
         //then
+        assertThat(member.getLoginId()).isEqualTo(LOGIN_ID);
+        assertThat(member.getPassword()).isEqualTo(PASSWORD);
+        assertThat(member.getName()).isEqualTo(UPDATE_NAME);
+        assertThat(member.getEmail()).isEqualTo(UPDATE_EMAIL);
+        assertThat(member.getRole()).isEqualTo(UPDATE_ROLE);
+        assertThat(member.getBirthday()).isEqualTo(UPDATE_BIRTHDAY);
+        assertThat(member.getGender()).isEqualTo(UPDATE_GENDER);
+        assertThat(member.getAddress()).isEqualTo(UPDATE_ADDRESS);
+        assertThat(member.getProfileImage()).isEqualTo(UPDATE_PROFILE_IMAGE);
 
         //verify
+        verify(memberRepository, times(1)).findById(any(Long.class));
     }
 
     @Test
