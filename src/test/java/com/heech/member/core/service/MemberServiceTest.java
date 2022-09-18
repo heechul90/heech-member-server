@@ -198,6 +198,19 @@ class MemberServiceTest {
     }
 
     @Test
+    @DisplayName("멤버 수정_예외 발생")
+    void updateMember_exception() {
+        //expected
+        assertThatThrownBy(() -> memberService.updateMember(NOT_FOUND_ENTITY_ID, any()))
+                .isInstanceOf(EntityNotFound.class)
+                .hasMessageStartingWith(HAS_MESSAGE_STARTING_WITH)
+                .hasMessageEndingWith(HAS_MEASSAGE_ENDING_WITH);
+
+        //verify
+        verify(memberRepository, times(1)).findById(any(Long.class));
+    }
+
+    @Test
     @DisplayName("멤버 삭제")
     void deleteMember() {
     }
