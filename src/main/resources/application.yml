@@ -1,10 +1,13 @@
+--- #로컬 설정
 spring:
+  profiles:
+    active: local
 
   datasource:
-    url: jdbc:mariadb://localhost:3307/heech_db?allowPublicKeyRetrieval=true&useSSL=false
-    username: heech_user
-    password: heech_pass
-    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:h2:tcp://localhost/~/heech_db
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
 
   jpa:
     hibernate:

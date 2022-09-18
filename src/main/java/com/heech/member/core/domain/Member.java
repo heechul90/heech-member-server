@@ -3,14 +3,19 @@ package com.heech.member.core.domain;
 import com.heech.member.core.dto.UpdateMemberParam;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static org.springframework.util.StringUtils.*;
+
 @Entity
 @Table(name = "member")
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
@@ -87,11 +92,16 @@ public class Member {
         this.signinDate = LocalDateTime.now();
     }
 
-    /**
-     * 회원 수정
-     */
+    /** 회원 수정 */
     public void updateMember(UpdateMemberParam param) {
-
+        this.name = param.getName();
+        this.email = param.getEmail();
+        this.role = param.getRole();
+        this.birthday = hasText(param.getBirthday()) ? param.getBirthday() : null;
+        this.gender = param.getGender() != null ? param.getGender() : null;
+        this.mobile = param.getMobile() != null ? param.getMobile() : null;
+        this.address = param.getAddress() != null ? param.getAddress() : null;
+        this.profileImage = hasText(param.getProfileImage()) ? param.getProfileImage() : null;
     }
 
     //===변경===//
