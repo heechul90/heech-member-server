@@ -3,6 +3,7 @@ package com.heech.member.core.repository;
 import com.heech.member.core.domain.Gender;
 import com.heech.member.core.domain.Member;
 import com.heech.member.core.dto.MemberSearchCondition;
+import com.heech.member.core.dto.SearchCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -76,16 +77,16 @@ public class MemberQueryRepository {
     /**
      * where searchCondition LIKE '%searchKeyword%'
      */
-    private BooleanExpression searchCondition(String searchCondition, String searchKeyword) {
-        if (!hasText(searchCondition) || !hasText(searchKeyword)) {
+    private BooleanExpression searchCondition(SearchCondition searchCondition, String searchKeyword) {
+        if (searchCondition == null || !hasText(searchKeyword)) {
             return null;
         }
 
-        if (searchCondition.equals("ID")) {
+        if (SearchCondition.ID.equals(searchCondition)) {
             return member.loginId.contains(searchKeyword);
-        } else if (searchCondition.equals("NAME")) {
+        } else if (SearchCondition.NAME.equals(searchCondition)) {
             return member.name.contains(searchKeyword);
-        } else if (searchCondition.equals("EMAIL")) {
+        } else if (SearchCondition.EMAIL.equals(searchCondition)) {
             return member.email.contains(searchKeyword);
         } else {
             return null;

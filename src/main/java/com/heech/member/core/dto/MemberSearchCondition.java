@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class MemberSearchCondition extends CommonSearchCondition {
 
+    private SearchCondition searchCondition;
     private Gender searchGender;
     private String searchIsLocked;
     private String searchIsDormancy;

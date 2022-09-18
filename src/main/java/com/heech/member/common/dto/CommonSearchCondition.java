@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class CommonSearchCondition {
 
-    private String searchCondition;
     private String searchKeyword;
 
 }

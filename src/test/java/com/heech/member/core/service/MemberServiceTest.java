@@ -2,6 +2,7 @@ package com.heech.member.core.service;
 
 import com.heech.member.core.domain.*;
 import com.heech.member.core.dto.MemberSearchCondition;
+import com.heech.member.core.dto.SearchCondition;
 import com.heech.member.core.dto.UpdateMemberParam;
 import com.heech.member.core.repository.MemberQueryRepository;
 import com.heech.member.core.repository.MemberRepository;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
@@ -86,14 +88,19 @@ class MemberServiceTest {
         for (int i = 0; i < 15; i++) {
             members.add(getMember(LOGIN_ID, PASSWORD, NAME + i, EMAIL, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS));
         }
-        //given(memberQueryRepository.findMembers(any(), any())).willReturn(new PageImpl(members));
+        given(memberQueryRepository.findMembers(any(), any())).willReturn(new PageImpl(members));
 
         MemberSearchCondition condition = new MemberSearchCondition();
+        condition.setSearchCondition(SearchCondition.NAME);
+        condition.setSearchKeyword("test");
         PageRequest pageRequest = PageRequest.of(0, 10);
 
         //when
+        Page<Member> content = memberService.findMembers(condition, pageRequest);
 
         //then
+        assertThat(content.getTotalElements()).isEqualTo(15);
+        assertThat(content.getContent().size()).isEqualTo(15);
 
         //verify
     }
@@ -213,5 +220,17 @@ class MemberServiceTest {
     @Test
     @DisplayName("멤버 삭제")
     void deleteMember() {
+        //given
+        Member member = getMember(LOGIN_ID, PASSWORD, NAME, EMAIL, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS);
+        given(memberRepository.findById(any(Long.class))).willReturn(Optional.ofNullable(member));
+
+        //when
+        memberService.deleteMember(any(Long.class));
+
+        //then
+
+
+        //verify
+        verify(memberRepository, times(1)).delete(any(Member.class));
     }
 }
