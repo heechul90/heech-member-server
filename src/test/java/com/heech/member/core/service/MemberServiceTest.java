@@ -228,7 +228,10 @@ class MemberServiceTest {
         memberService.deleteMember(any(Long.class));
 
         //then
-
+        assertThatThrownBy(() -> memberService.deleteMember(member.getId()))
+                .isInstanceOf(EntityNotFound.class)
+                .hasMessageStartingWith(HAS_MESSAGE_STARTING_WITH)
+                .hasMessageEndingWith("id = " + member.getId());
 
         //verify
         verify(memberRepository, times(1)).delete(any(Member.class));
