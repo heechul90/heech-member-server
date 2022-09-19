@@ -4,15 +4,13 @@ import com.heech.member.common.json.JsonResult;
 import com.heech.member.core.controller.request.CreateMemberRequest;
 import com.heech.member.core.controller.request.UpdateMemberRequest;
 import com.heech.member.core.controller.response.CreateMemberResponse;
+import com.heech.member.core.controller.response.UpdateMemberResponse;
 import com.heech.member.core.domain.Member;
 import com.heech.member.core.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -49,6 +47,19 @@ public class MemberController {
     /**
      * 멤버 수정
      */
+    @PutMapping(value = "/{memberId}")
+    public JsonResult updateMember(@PathVariable("memberId") Long memberId,
+                                   @RequestBody @Validated UpdateMemberRequest request) {
+
+        //validate
+        request.validate();
+
+        //update
+        memberService.updateMember(memberId, request.toUpdateMemberParam());
+        Member updatedMember = memberService.findMember(memberId);
+
+        return JsonResult.OK(new UpdateMemberResponse(updatedMember.getId()));
+    }
 
     /**
      * 멤버 삭제

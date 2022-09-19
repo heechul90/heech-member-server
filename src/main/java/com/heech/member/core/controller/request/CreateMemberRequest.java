@@ -89,6 +89,7 @@ public class CreateMemberRequest {
                 .build();
     }
 
+    //validate
     public void validate() {
         List<JsonError> errors = new ArrayList<>();
 
