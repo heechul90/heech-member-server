@@ -7,7 +7,6 @@ import com.heech.member.core.dto.UpdateMemberParam;
 import com.heech.member.core.repository.MemberQueryRepository;
 import com.heech.member.core.repository.MemberRepository;
 import com.heech.member.exception.EntityNotFound;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
@@ -52,7 +52,6 @@ class MemberServiceTest {
     public static final Address UPDATE_ADDRESS = new Address("22222", "세종시", "601호");
     public static final String UPDATE_PROFILE_IMAGE = "update_profileImage";
 
-    //ENTITY_INFO
     public static final String ENTITY_NAME = "member";
     public static final long NOT_FOUND_ENTITY_ID = 0L;
 
