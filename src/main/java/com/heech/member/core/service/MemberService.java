@@ -6,6 +6,7 @@ import com.heech.member.core.dto.UpdateMemberParam;
 import com.heech.member.core.repository.MemberQueryRepository;
 import com.heech.member.core.repository.MemberRepository;
 import com.heech.member.exception.EntityNotFound;
+import com.sun.jdi.request.DuplicateRequestException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

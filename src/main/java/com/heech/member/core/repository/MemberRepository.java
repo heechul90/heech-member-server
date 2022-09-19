@@ -10,4 +10,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     /** 멤버 조회 by loginId */
     Optional<Member> findByLoginId(String loginId);
 
+    /** duplication check */
+    int countMemberByLoginId(String loginId);
+
 }
