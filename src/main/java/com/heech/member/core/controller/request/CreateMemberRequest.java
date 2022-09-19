@@ -46,8 +46,8 @@ public class CreateMemberRequest {
     private String birthdayMonth;
     @Length(min = 2, max = 2)
     @NotEmpty(message = "생년월일 일을 입력하세요.")
-
     private String birthdayDay;
+
     @NotNull(message = "성별을 선택하세요.")
     private Gender gender;
 
