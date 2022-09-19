@@ -65,4 +65,13 @@ public class MemberController {
      * 멤버 삭제
      */
 
+    @DeleteMapping(value = "/{memberId}")
+    public JsonResult deleteMember(@PathVariable("memberId") Long memberId) {
+
+        //delete
+        memberService.deleteMember(memberId);
+
+        return JsonResult.OK();
+    }
+
 }
