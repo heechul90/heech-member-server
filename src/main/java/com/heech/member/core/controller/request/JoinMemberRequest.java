@@ -52,6 +52,5 @@ public class JoinMemberRequest {
         if (errors.size() > 0) {
             throw new JsonInvalidRequest(errors);
         }
-
     }
 }
