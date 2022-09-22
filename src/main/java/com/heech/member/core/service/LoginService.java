@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class JoinService {
+public class LoginService {
 
     private final MemberRepository memberRepository;
 
@@ -20,12 +20,9 @@ public class JoinService {
      * 회원가입
      */
     @Transactional
-    public Member joinMember(Member member) {
-        int countMember = memberRepository.countMemberByLoginId(member.getLoginId());
-        if (countMember > 0) {
-            throw new DuplicateRequestException("이미 존재하는 longinId 입니다.");
-        }
-
-        return memberRepository.save(member);
+    public Member loginMember(String loginId, String password) {
+        return memberRepository.findByLoginId(loginId)
+                .filter(member -> member.getPassword().equals(password))
+                .orElse(null);
     }
 }

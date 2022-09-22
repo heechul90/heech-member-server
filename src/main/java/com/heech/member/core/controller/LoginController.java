@@ -1,11 +1,15 @@
 package com.heech.member.core.controller;
 
+import com.heech.member.common.json.JsonResult;
+import com.heech.member.core.controller.request.LoginRequest;
+import com.heech.member.core.domain.Member;
+import com.heech.member.core.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.catalina.connector.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,8 +19,15 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/api")
 public class LoginController {
 
+    private final LoginService loginService;
+
     @GetMapping(value = "/login")
-    public void login() {
+    public ResponseEntity<Response> login(@RequestBody LoginRequest request) {
+
+        Member loginMember = loginService.loginMember(request.getLoginId(), request.getPassword());
+
+        return null;
+
 
     }
 
