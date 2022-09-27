@@ -26,7 +26,7 @@ public class JoinController {
         //validate
         request.validate();
 
-        Member savedMember = joinService.loginMember(request.toEntity());
+        //Member savedMember = joinService.loginMember(request.toEntity());
         return JsonResult.OK();
     }
 }
