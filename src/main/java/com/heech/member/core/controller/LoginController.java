@@ -1,5 +1,6 @@
 package com.heech.member.core.controller;
 
+import com.heech.member.common.json.JsonResult;
 import com.heech.member.core.controller.request.LoginRequest;
 import com.heech.member.core.domain.Member;
 import com.heech.member.core.service.LoginService;
@@ -20,7 +21,7 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping(value = "/login")
-    public ResponseEntity<Response> login(@RequestBody LoginRequest request) {
+    public JsonResult login(@RequestBody LoginRequest request) {
 
         Member loginMember = loginService.loginMember(request.getLoginId(), request.getPassword());
 
@@ -29,7 +30,7 @@ public class LoginController {
         }
 
 
-        return null;
+        return JsonResult.OK(loginMember);
     }
 
     @PostMapping(value = "/logout")

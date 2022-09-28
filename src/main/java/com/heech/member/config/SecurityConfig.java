@@ -25,6 +25,7 @@ public class SecurityConfig {
                 .cors().and()
                 .headers().frameOptions().disable().and()
                 .authorizeRequests()
+                .antMatchers("/login").permitAll()
                 .antMatchers("/api/login").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .anyRequest().authenticated().and()
