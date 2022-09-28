@@ -28,8 +28,6 @@ public class LoginController {
         if (loginMember == null) {
             return null;
         }
-
-
         return JsonResult.OK(loginMember);
     }
 
