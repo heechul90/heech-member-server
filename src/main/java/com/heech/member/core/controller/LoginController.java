@@ -19,7 +19,7 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping(value = "/login")
+    @PostMapping(value = "/login")
     public ResponseEntity<Response> login(@RequestBody LoginRequest request) {
 
         Member loginMember = loginService.loginMember(request.getLoginId(), request.getPassword());
@@ -30,11 +30,6 @@ public class LoginController {
 
 
         return null;
-    }
-
-    @PostMapping(value = "/login")
-    public void login(HttpServletRequest request) {
-
     }
 
     @PostMapping(value = "/logout")
