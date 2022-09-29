@@ -2,8 +2,9 @@ package com.heech.member.core.controller;
 
 import com.heech.member.common.json.JsonResult;
 import com.heech.member.core.controller.request.JoinMemberRequest;
+import com.heech.member.core.controller.response.JoinMemberResponse;
 import com.heech.member.core.domain.Member;
-import com.heech.member.core.service.LoginService;
+import com.heech.member.core.service.JoinService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -15,18 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/user/join")
+@RequestMapping(value = "/api")
 public class JoinController {
 
-    private final LoginService joinService;
+    private final JoinService joinService;
 
-    @PostMapping
+    @PostMapping(value = "/join")
     public JsonResult joinMember(@RequestBody @Validated JoinMemberRequest request) {
 
         //validate
         request.validate();
 
-        //Member savedMember = joinService.loginMember(request.toEntity());
-        return JsonResult.OK();
+        //join
+        Member joinedMember = joinService.joinMember(request.toEntity());
+
+        return JsonResult.OK(new JoinMemberResponse(joinedMember.getId()));
     }
 }

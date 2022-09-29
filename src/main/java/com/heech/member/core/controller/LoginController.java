@@ -41,7 +41,7 @@ public class LoginController {
         HttpSession session = httpServletRequest.getSession(true);
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
-        return JsonResult.OK(loginMember);
+        return JsonResult.OK(loginMember.getId());
     }
 
     /**
