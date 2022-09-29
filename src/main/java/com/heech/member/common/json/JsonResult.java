@@ -34,6 +34,13 @@ public class JsonResult<T> {
                 .build();
     }
 
+    public static <T> JsonResult<T> ERROR(String message) {
+        return (JsonResult<T>) JsonResult.builder()
+                .transaction_time(LocalDateTime.now())
+                .message(message)
+                .build();
+    }
+
     public static <T> JsonResult<T> ERROR(HttpStatus status, String message, List<JsonError> errors) {
         return (JsonResult<T>) JsonResult.builder()
                 .transaction_time(LocalDateTime.now())
