@@ -49,9 +49,12 @@ class JoinControllerTest {
 
     @Test
     void joinMember() {
+        //given
         Member member = getMember(LOGIN_ID, PASSWORD, NAME, EMAIL, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS);
         given(joinService.joinMember(any(Member.class))).willReturn(member);
 
+        //when
+        Member joinedMember = joinService.joinMember(any(Member.class));
 
 
     }
