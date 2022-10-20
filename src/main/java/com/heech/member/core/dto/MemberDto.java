@@ -2,7 +2,9 @@ package com.heech.member.core.dto;
 
 import com.heech.member.core.domain.Member;
 import lombok.Getter;
+import org.springframework.util.StringUtils;
 
+import static org.springframework.util.StringUtils.*;
 import static org.springframework.util.StringUtils.hasText;
 
 @Getter
@@ -31,10 +33,10 @@ public class MemberDto {
         this.name = member.getName();
         this.email = member.getEmail();
         this.role = member.getRole().getName();
-        this.birthday = member.getBirthday().substring(0, 4) + "-" + member.getBirthday().substring(4, 6) + "-" + member.getBirthday().substring(6, 8);
-        this.gender = member.getGender().getName();
-        this.phoneNumber = member.getMobile().fullMobileNumber();
-        this.address = member.getAddress().fullAddress();
+        this.birthday = !hasText(member.getBirthday()) ? null : member.getBirthday().substring(0, 4) + "-" + member.getBirthday().substring(4, 6) + "-" + member.getBirthday().substring(6, 8);
+        this.gender =  member.getGender() == null ? null : member.getGender().getName();
+        this.phoneNumber = member.getMobile() == null ? null : member.getMobile().fullMobileNumber();
+        this.address = member.getAddress() == null ? null : member.getAddress().fullAddress();
         this.profileImage = hasText(member.getProfileImage()) ? member.getProfileImage() : "no-image";
     }
 }

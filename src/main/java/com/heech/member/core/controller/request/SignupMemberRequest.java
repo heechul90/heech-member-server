@@ -8,9 +8,7 @@ import com.heech.member.exception.JsonInvalidRequest;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
