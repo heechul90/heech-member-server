@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
-public class LoginRequest {
+public class LoginMemberRequest {
 
     @NotEmpty
     private String loginId;

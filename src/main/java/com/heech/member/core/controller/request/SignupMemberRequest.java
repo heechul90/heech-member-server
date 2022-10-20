@@ -8,6 +8,9 @@ import com.heech.member.exception.JsonInvalidRequest;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -16,7 +19,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class JoinMemberRequest {
+public class SignupMemberRequest {
 
     //로그인정보
     @NotBlank(message = "아이디를 입력하세요.")
@@ -36,10 +39,10 @@ public class JoinMemberRequest {
     @Length(max = 60)
     private String email;
 
-    public Member toEntity() {
+    public Member toMember(PasswordEncoder passwordEncoder) {
         return Member.createMemberBuilder()
                 .loginId(this.loginId)
-                .password(this.password)
+                .password(passwordEncoder.encode(this.password))
                 .name(this.name)
                 .email(this.email)
                 .role(Role.ROLE_USER)

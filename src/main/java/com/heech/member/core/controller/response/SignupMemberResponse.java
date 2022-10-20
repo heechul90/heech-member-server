@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class JoinMemberResponse {
+public class SignupMemberResponse {
 
-    private Long joinedMemberId;
+    private Long signupMemberId;
 
 }
