@@ -32,6 +32,9 @@ logging:
     root: info
     org.hibernate.SQL: debug
 
+jwt
+  secret:
+
 --- #로컬2 설정
 spring:
   config:
