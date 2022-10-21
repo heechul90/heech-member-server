@@ -1,14 +1,12 @@
 package com.heech.member.core.controller.request;
 
 import com.heech.member.common.json.ErrorCode;
-import com.heech.member.common.json.JsonError;
 import com.heech.member.core.domain.Gender;
 import com.heech.member.core.domain.Member;
 import com.heech.member.core.domain.Role;
 import com.heech.member.exception.JsonInvalidRequest;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Email;

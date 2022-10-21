@@ -1,7 +1,6 @@
 package com.heech.member.common.exception;
 
 import com.heech.member.common.json.ErrorCode;
-import com.heech.member.common.json.JsonError;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 

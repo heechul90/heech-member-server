@@ -2,7 +2,6 @@ package com.heech.member.common.json;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
