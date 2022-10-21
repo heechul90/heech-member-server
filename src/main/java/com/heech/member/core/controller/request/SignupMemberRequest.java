@@ -1,5 +1,6 @@
 package com.heech.member.core.controller.request;
 
+import com.heech.member.common.json.ErrorCode;
 import com.heech.member.common.json.JsonError;
 import com.heech.member.core.domain.Gender;
 import com.heech.member.core.domain.Member;
@@ -21,20 +22,16 @@ public class SignupMemberRequest {
 
     //로그인정보
     @NotBlank(message = "아이디를 입력하세요.")
-    @Length(max = 80)
     private String loginId;
 
     @NotBlank(message = "비밀번호를 입력하세요")
-    @Length(max = 60)
     private String password;
 
     @NotBlank(message = "이름을 입력하세요.")
-    @Length(max = 30)
     private String name;
 
     @NotBlank(message = "이메일을 입력하세요.")
     @Email
-    @Length(max = 60)
     private String email;
 
     public Member toMember(PasswordEncoder passwordEncoder) {
@@ -54,11 +51,11 @@ public class SignupMemberRequest {
 
     //validate
     public void validate() {
-        List<JsonError> errors = new ArrayList<>();
+        List<ErrorCode> errorCodes = new ArrayList<>();
 
 
-        if (errors.size() > 0) {
-            throw new JsonInvalidRequest(errors);
+        if (errorCodes.size() > 0) {
+            throw new JsonInvalidRequest(errorCodes);
         }
     }
 }

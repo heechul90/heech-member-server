@@ -1,7 +1,7 @@
 package com.heech.member.core.controller;
 
 import com.heech.member.common.json.JsonResult;
-import com.heech.member.config.SecurityUtil;
+import com.heech.member.common.util.SecurityUtil;
 import com.heech.member.core.controller.request.LoginMemberRequest;
 import com.heech.member.core.controller.request.SignupMemberRequest;
 import com.heech.member.core.controller.response.SignupMemberResponse;

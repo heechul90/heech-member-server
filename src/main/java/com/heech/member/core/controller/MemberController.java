@@ -64,7 +64,6 @@ public class MemberController {
 
         //save
         Member savedMember = memberService.saveMember(request.toEntity());
-
         return JsonResult.OK(new CreateMemberResponse(savedMember.getId()));
 
     }
@@ -82,7 +81,6 @@ public class MemberController {
         //update
         memberService.updateMember(memberId, request.toUpdateMemberParam());
         Member updatedMember = memberService.findMember(memberId);
-
         return JsonResult.OK(new UpdateMemberResponse(updatedMember.getId()));
     }
 
@@ -95,8 +93,6 @@ public class MemberController {
 
         //delete
         memberService.deleteMember(memberId);
-
         return JsonResult.OK();
     }
-
 }

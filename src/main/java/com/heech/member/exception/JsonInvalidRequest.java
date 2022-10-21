@@ -1,6 +1,7 @@
 package com.heech.member.exception;
 
 import com.heech.member.common.exception.CommonException;
+import com.heech.member.common.json.ErrorCode;
 import com.heech.member.common.json.JsonError;
 import org.springframework.http.HttpStatus;
 
@@ -14,9 +15,9 @@ public class JsonInvalidRequest extends CommonException {
         super(MESSAGE);
     }
 
-    public JsonInvalidRequest(List<JsonError> errors) {
+    public JsonInvalidRequest(List<ErrorCode> errorCodes) {
         super(MESSAGE);
-        addError(errors);
+        addError(errorCodes);
     }
 
     @Override

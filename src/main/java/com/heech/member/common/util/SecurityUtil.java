@@ -1,4 +1,4 @@
-package com.heech.member.config;
+package com.heech.member.common.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
