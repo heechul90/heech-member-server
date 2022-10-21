@@ -1,5 +1,6 @@
 package com.heech.member.core.domain;
 
+import com.heech.member.common.entity.BaseTimeEntity;
 import com.heech.member.core.dto.UpdateMemberParam;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -17,7 +18,7 @@ import static org.springframework.util.StringUtils.*;
 @Table(name = "member")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")

@@ -24,6 +24,11 @@ spring:
   messages:
     basename: messages,errors
 
+  #swagger error -> spring boot 2.7.x
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
 server:
   port: 10001
 
@@ -64,6 +69,11 @@ spring:
 
   messages:
     basename: messages,errors
+
+  #swagger error -> spring boot 2.7.x
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 server:
   port: 10001
