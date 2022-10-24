@@ -60,6 +60,4 @@ public class SessionManager {
                 .findFirst()
                 .orElse(null);
     }
-
-
 }

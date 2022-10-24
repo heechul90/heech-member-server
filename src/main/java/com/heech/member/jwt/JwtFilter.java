@@ -3,7 +3,6 @@ package com.heech.member.jwt;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static org.springframework.util.StringUtils.*;
+import static org.springframework.util.StringUtils.hasText;
 
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
