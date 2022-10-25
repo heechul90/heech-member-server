@@ -30,7 +30,7 @@ public class TestDataInit {
     static class InitService {
 
         private final PasswordEncoder passwordEncoder;
-        @PersistenceContext private final EntityManager em;
+        @PersistenceContext public final EntityManager em;
 
         private static Member getMember(String loginId, String password, String name, String email, Role role, String birthday, Gender gender, Mobile mobile, Address address) {
             return Member.createMemberBuilder()

@@ -13,6 +13,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     /** duplication check */
     int countMemberByLoginId(String loginId);
 
+    /** 멤버 존재 여부 */
     boolean existsByLoginId(String loginId);
 
 }
