@@ -1,6 +1,21 @@
 # heech-member-server
 
-## 로그인
-- spring security
-- jwt token
-[[참고 블로그]](https://velog.io/@juno0713/Spring-Security-JWT-React-w3wpg5yi)
+## heech service
+### server
+[[히치회원서버]](https://github.com/heechul90/heech-member-server) 👈 <br/>
+[[히치로그서버]](https://github.com/heechul90/heech-heechlog-server) <br/>
+
+### client
+[[히치프론트]](https://github.com/heechul90/heech-client-vue)
+
+## 프로젝트 설정
+- 프로젝트 선택
+    - Project : Gradle Project
+    - Language : Java
+    - Spring Boot : 2.7.x
+- Project Metadata
+    - Group : com.heech
+    - Artifact : member
+    - Package name : com.heech.member
+    - Packaging : Jar
+    - Java : 11
