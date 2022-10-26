@@ -13,9 +13,8 @@ public class MemberDto {
     private Long memberId;
 
     //로그인정보
-    private String loginId;
-    private String name;
     private String email;
+    private String name;
 
     //권한정보
     private String role;
@@ -29,9 +28,8 @@ public class MemberDto {
 
     public MemberDto(Member member) {
         this.memberId = member.getId();
-        this.loginId = member.getLoginId();
-        this.name = member.getName();
         this.email = member.getEmail();
+        this.name = member.getName();
         this.role = member.getRole().getName();
         this.birthday = !hasText(member.getBirthday()) ? null : member.getBirthday().substring(0, 4) + "-" + member.getBirthday().substring(4, 6) + "-" + member.getBirthday().substring(6, 8);
         this.gender =  member.getGender() == null ? null : member.getGender().getName();

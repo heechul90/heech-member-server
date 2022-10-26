@@ -32,12 +32,11 @@ public class TestDataInit {
         private final PasswordEncoder passwordEncoder;
         @PersistenceContext public final EntityManager em;
 
-        private static Member getMember(String loginId, String password, String name, String email, Role role, String birthday, Gender gender, Mobile mobile, Address address) {
+        private static Member getMember(String email, String password, String name, Role role, String birthday, Gender gender, Mobile mobile, Address address) {
             return Member.createMemberBuilder()
-                    .loginId(loginId)
+                    .email(email)
                     .password(password)
                     .name(name)
-                    .email(email)
                     .role(role)
                     .birthday(birthday)
                     .gender(gender)
@@ -47,8 +46,8 @@ public class TestDataInit {
         }
 
         public void memberInit() {
-            Member springMember = getMember("spring", passwordEncoder.encode("1234"), "스프링", "spring@spring.com", Role.ROLE_USER, "19901009", Gender.M, new Mobile("010", "4250", "4296"), new Address("00000", "Sejong", "101호"));
-            Member adminMember = getMember("admin", passwordEncoder.encode("1234"), "관리자", "admin@spring.com", Role.ROLE_ADMIN, "20001009", Gender.F, new Mobile("010", "4250", "4296"), new Address("00000", "Sejong", "101호"));
+            Member springMember = getMember("spring", passwordEncoder.encode("1234"), "스프링", Role.ROLE_USER, "19901009", Gender.M, new Mobile("010", "4250", "4296"), new Address("00000", "Sejong", "101호"));
+            Member adminMember = getMember("admin", passwordEncoder.encode("1234"), "관리자", Role.ROLE_ADMIN, "20001009", Gender.F, new Mobile("010", "4250", "4296"), new Address("00000", "Sejong", "101호"));
             em.persist(springMember);
             em.persist(adminMember);
         }

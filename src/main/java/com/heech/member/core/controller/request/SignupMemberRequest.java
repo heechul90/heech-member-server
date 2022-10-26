@@ -19,8 +19,9 @@ import java.util.List;
 public class SignupMemberRequest {
 
     //로그인정보
-    @NotBlank(message = "아이디를 입력하세요.")
-    private String loginId;
+    @NotBlank(message = "이메일을 입력하세요.")
+    //@Email
+    private String email;
 
     @NotBlank(message = "비밀번호를 입력하세요")
     private String password;
@@ -28,16 +29,12 @@ public class SignupMemberRequest {
     @NotBlank(message = "이름을 입력하세요.")
     private String name;
 
-    @NotBlank(message = "이메일을 입력하세요.")
-    @Email
-    private String email;
 
     public Member toMember(PasswordEncoder passwordEncoder) {
         return Member.createMemberBuilder()
-                .loginId(this.loginId)
+                .email(this.email)
                 .password(passwordEncoder.encode(this.password))
                 .name(this.name)
-                .email(this.email)
                 .role(Role.ROLE_USER)
                 .birthday(null)
                 .gender(Gender.M)

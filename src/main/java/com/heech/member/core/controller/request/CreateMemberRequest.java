@@ -18,15 +18,13 @@ import java.util.List;
 public class CreateMemberRequest {
 
     //로그인정보
-    @NotBlank(message = "아이디를 입력하세요.")
-    private String loginId;
+    @NotBlank(message = "이메일을 입력하세요.")
+    //@Email
+    private String email;
     @NotBlank(message = "비밀번호를 입력하세요")
     private String password;
     @NotBlank(message = "이름을 입력하세요.")
     private String name;
-    @NotBlank(message = "이메일을 입력하세요.")
-    @Email
-    private String email;
 
     //권한정보
     @NotNull
@@ -61,10 +59,9 @@ public class CreateMemberRequest {
 
     public Member toEntity() {
         return Member.createMemberBuilder()
-                .loginId(this.loginId)
+                .email(this.email)
                 .password(this.password)
                 .name(this.name)
-                .email(this.email)
                 .role(this.role)
                 .birthday(this.birthdayYear + this.birthdayMonth + this.birthdayDay)
                 .gender(this.gender)
@@ -90,5 +87,4 @@ public class CreateMemberRequest {
             throw new JsonInvalidRequest(errorCodes);
         }
     }
-
 }

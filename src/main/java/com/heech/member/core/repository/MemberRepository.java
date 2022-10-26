@@ -7,13 +7,14 @@ import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    /** 멤버 조회 by loginId */
-    Optional<Member> findByLoginId(String loginId);
+    /**
+     * 멤버 조회 by email
+     */
+    Optional<Member> findByEmail(String email);
 
-    /** duplication check */
-    int countMemberByLoginId(String loginId);
-
-    /** 멤버 존재 여부 */
-    boolean existsByLoginId(String loginId);
+    /**
+     * 멤버 존재 여부
+     */
+    boolean existsByEmail(String email);
 
 }

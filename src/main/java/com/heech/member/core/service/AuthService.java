@@ -31,7 +31,7 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return memberRepository.findByLoginId(username)
+        return memberRepository.findByEmail(username)
                 .map(this::getUser)
                 .orElseThrow(() -> new UsernameNotFoundException(username + "은 존재하지 않는 회원입니다."));
     }
@@ -46,14 +46,14 @@ public class AuthService implements UserDetailsService {
 
     @Transactional
     public Member signup(Member member) {
-        if (memberRepository.existsByLoginId(member.getLoginId())) {
+        if (memberRepository.existsByEmail(member.getEmail())) {
             throw new RuntimeException("이미 가입되어 있는 회원입니다.");
         }
         return memberRepository.save(member);
     }
 
-    public TokenDto login(String loginId, String password) {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginId, password);
+    public TokenDto login(String email, String password) {
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
         Authentication authentication = managerBuilder.getObject().authenticate(authenticationToken);
         return tokenProvider.generateTokenDto(authentication);
     }

@@ -42,7 +42,7 @@ public class MemberQueryRepository {
      * 회원 목록
      */
     private List<Member> getMemberList(MemberSearchCondition condition, Pageable pageable) {
-        List<Member> members = queryFactory
+        return queryFactory
                 .select(member)
                 .from(member)
                 .where(
@@ -55,14 +55,13 @@ public class MemberQueryRepository {
                 .limit(pageable.getPageSize())
                 .orderBy(member.id.desc())
                 .fetch();
-        return members;
     }
 
     /**
      * 회원 목록 카운트
      */
     private JPAQuery<Long> getMemberListCount(MemberSearchCondition condition) {
-        JPAQuery<Long> count = queryFactory
+        return queryFactory
                 .select(member.count())
                 .from(member)
                 .where(
@@ -71,7 +70,6 @@ public class MemberQueryRepository {
                         searchIsLockedEq(condition.getSearchIsLocked()),
                         searchIsMormancyEq(condition.getSearchIsDormancy())
                 );
-        return count;
     }
 
     /**
@@ -82,15 +80,13 @@ public class MemberQueryRepository {
             return null;
         }
 
-        if (SearchCondition.ID.equals(searchCondition)) {
-            return member.loginId.contains(searchKeyword);
-        } else if (SearchCondition.NAME.equals(searchCondition)) {
+        if (SearchCondition.NAME.equals(searchCondition)) {
             return member.name.contains(searchKeyword);
         } else if (SearchCondition.EMAIL.equals(searchCondition)) {
             return member.email.contains(searchKeyword);
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**

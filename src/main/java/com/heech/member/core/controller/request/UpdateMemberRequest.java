@@ -24,9 +24,6 @@ public class UpdateMemberRequest {
     //로그인정보
     @NotBlank(message = "이름을 입력하세요.")
     private String name;
-    @NotBlank(message = "이메일을 입력하세요.")
-    @Email
-    private String email;
 
     //권한정보
     @NotNull
@@ -62,7 +59,6 @@ public class UpdateMemberRequest {
     public UpdateMemberParam toUpdateMemberParam() {
         return UpdateMemberParam.builder()
                 .name(this.name)
-                .email(this.email)
                 .role(this.role)
                 .birthday(this.birthdayYear + this.birthdayMonth + this.birthdayDay)
                 .gender(this.gender)

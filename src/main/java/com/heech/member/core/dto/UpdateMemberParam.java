@@ -14,7 +14,6 @@ public class UpdateMemberParam {
 
     //로그인정보
     private String name;
-    private String email;
 
     //권한정보
     private Role role;

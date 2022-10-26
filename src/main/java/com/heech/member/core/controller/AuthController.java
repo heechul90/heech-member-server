@@ -13,6 +13,7 @@ import com.heech.member.jwt.TokenDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -26,14 +27,14 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/signup")
-    public JsonResult signup(@RequestBody SignupMemberRequest request) {
+    public JsonResult signup(@RequestBody @Validated SignupMemberRequest request) {
         Member signupMember = authService.signup(request.toMember(passwordEncoder));
         return JsonResult.OK(new SignupMemberResponse(signupMember.getId()));
     }
 
     @PostMapping("/login")
-    public JsonResult login(@RequestBody LoginMemberRequest request) {
-        TokenDto token = authService.login(request.getLoginId(), request.getPassword());
+    public JsonResult login(@RequestBody @Validated LoginMemberRequest request) {
+        TokenDto token = authService.login(request.getEmail(), request.getPassword());
         return JsonResult.OK(token);
     }
 

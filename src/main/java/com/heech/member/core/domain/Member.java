@@ -26,13 +26,11 @@ public class Member extends BaseTimeEntity {
 
     //로그임정보
     @Column(length = 80, unique = true, nullable = false, updatable = false)
-    private String loginId;
+    private String email;
     @Column(length = 60, nullable = false)
     private String password;
     @Column(length = 30, nullable = false)
     private String name;
-    @Column(length = 60)
-    private String email;
 
     //권한정보
     @Enumerated(EnumType.STRING)
@@ -68,16 +66,14 @@ public class Member extends BaseTimeEntity {
     //===생성===//
     /** 회원 생성 */
     @Builder(builderClassName = "createMemberBuilder", builderMethodName = "createMemberBuilder")
-    public Member(String loginId, String password, String name, String email, Role role, String birthday, Gender gender, Mobile mobile, Address address, String profileImage) {
-        Assert.hasText(name, "name은 필수값입니다.");
-        Assert.hasText(loginId, "loginId는 필수값입니다.");
-        Assert.hasText(password, "password는 필수값입니다.");
+    public Member(String email, String password, String name, Role role, String birthday, Gender gender, Mobile mobile, Address address, String profileImage) {
         Assert.hasText(email, "email은 필수값입니다.");
+        Assert.hasText(password, "password는 필수값입니다.");
+        Assert.hasText(name, "name은 필수값입니다.");
 
-        this.loginId = loginId;
+        this.email = email;
         this.password = password;
         this.name = name;
-        this.email = email;
         this.role = role;
         this.birthday = birthday;
         this.gender = gender;
@@ -96,7 +92,6 @@ public class Member extends BaseTimeEntity {
     /** 회원 수정 */
     public void updateMember(UpdateMemberParam param) {
         this.name = param.getName();
-        this.email = param.getEmail();
         this.role = param.getRole();
         this.birthday = hasText(param.getBirthday()) ? param.getBirthday() : null;
         this.gender = param.getGender() != null ? param.getGender() : null;
