@@ -1,4 +1,4 @@
-package com.heech.member.exception;
+package com.heech.member.common.exception;
 
 import com.heech.member.common.exception.CommonException;
 import com.heech.member.common.json.ErrorCode;

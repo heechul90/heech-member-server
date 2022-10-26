@@ -6,7 +6,7 @@ import com.heech.member.core.dto.SearchCondition;
 import com.heech.member.core.dto.UpdateMemberParam;
 import com.heech.member.core.repository.MemberQueryRepository;
 import com.heech.member.core.repository.MemberRepository;
-import com.heech.member.exception.EntityNotFound;
+import com.heech.member.common.exception.EntityNotFound;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,4 +1,4 @@
-package com.heech.member.exception;
+package com.heech.member.common.exception;
 
 import com.heech.member.common.exception.CommonException;
 import org.springframework.http.HttpStatus;

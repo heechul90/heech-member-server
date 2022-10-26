@@ -6,7 +6,7 @@ import com.heech.member.core.domain.Gender;
 import com.heech.member.core.domain.Mobile;
 import com.heech.member.core.domain.Role;
 import com.heech.member.core.dto.UpdateMemberParam;
-import com.heech.member.exception.JsonInvalidRequest;
+import com.heech.member.common.exception.JsonInvalidRequest;
 import lombok.Getter;
 import lombok.Setter;
 

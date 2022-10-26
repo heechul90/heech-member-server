@@ -1,12 +1,10 @@
 package com.heech.member.core.controller.request;
 
 import com.heech.member.common.json.ErrorCode;
-import com.heech.member.common.json.JsonError;
 import com.heech.member.core.domain.*;
-import com.heech.member.exception.JsonInvalidRequest;
+import com.heech.member.common.exception.JsonInvalidRequest;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
