@@ -19,6 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 
+/**
+ * 시큐리티 설정에서 .loginProcessingUrl("/login")
+ * login 요청이 오면 자동으로 UserDetailsService 타입으로 Ioc 되어 있는 loadUserByUsername 함수가 실행
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -29,6 +33,10 @@ public class AuthService implements UserDetailsService {
     private final AuthenticationManagerBuilder managerBuilder;
     private final TokenProvider tokenProvider;
 
+    /**
+     * 스프링이 로그인 요청을 가로칠 때, username, password 2개 를 가로채는데 password 부분은 알아서 처리함.
+     * username이 DB에 있는지만 확인하면 됨.
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return memberRepository.findByEmail(username)
