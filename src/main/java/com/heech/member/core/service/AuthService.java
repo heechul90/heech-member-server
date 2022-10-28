@@ -2,22 +2,16 @@ package com.heech.member.core.service;
 
 import com.heech.member.core.domain.Member;
 import com.heech.member.core.repository.MemberRepository;
-import com.heech.member.jwt.TokenDto;
-import com.heech.member.jwt.TokenProvider;
+import com.heech.member.config.jwt.TokenDto;
+import com.heech.member.config.jwt.TokenProvider;
+import com.nimbusds.oauth2.sdk.token.RefreshToken;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collections;
 
 @Slf4j
 @Service
@@ -26,7 +20,7 @@ import java.util.Collections;
 public class AuthService {
 
     private final MemberRepository memberRepository;
-    private final AuthenticationManagerBuilder managerBuilder;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final TokenProvider tokenProvider;
 
     /**
@@ -44,8 +38,14 @@ public class AuthService {
      * 로그인
      */
     public TokenDto login(String email, String password) {
+        //email, password 기반으로 AuthenticationToken 생성
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
-        Authentication authentication = managerBuilder.getObject().authenticate(authenticationToken);
+
+        //실제로 검증(email, password check)이 이루어지는 부분
+        //authenticate 메서드가 실행이 될 때 CustomUserDetailsService 에서 만들었던 loadUserByUsername 메서드가 실행됨
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+
+        //인증 정보를 기반으로 jwt 토큰 생성 및 반환
         return tokenProvider.generateTokenDto(authentication);
     }
 }

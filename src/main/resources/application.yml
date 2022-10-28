@@ -1,3 +1,38 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #        show_sql: true
+        format_sql: true
+        ues_sql_comment: true
+        default_batch_fetch_size: 1000
+    open-in-view: true
+
+  messages:
+    basename: messages, errors
+
+  #swagger error -> spring boot 2.7.x
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+server:
+  port: 10001
+
+logging:
+  level:
+    root: info
+    org.hibernate.SQL: debug
+
+#HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
+#echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret'|base64
+jwt:
+  header: Authorization
+  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  token-validity-in-seconds: 86400
+
 --- #로컬1 설정
 spring:
   config:
@@ -10,41 +45,6 @@ spring:
     password: heech_pass
     driver-class-name: org.mariadb.jdbc.Driver
 
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        #        show_sql: true
-        format_sql: true
-        ues_sql_comment: true
-        default_batch_fetch_size: 1000
-    open-in-view: true
-
-  messages:
-    basename: messages, errors
-
-  #swagger error -> spring boot 2.7.x
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-
-server:
-  port: 10001
-
-logging:
-  level:
-    root: info
-    org.hibernate.SQL: debug
-
-jwt:
-  header: Authorization
-  #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
-  #echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret'|base64
-  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-  token-validity-in-seconds: 86400
-
-
 --- #로컬2 설정
 spring:
   config:
@@ -56,37 +56,3 @@ spring:
     username: heech_user
     password: heech_pass
     driver-class-name: org.mariadb.jdbc.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        #        show_sql: true
-        format_sql: true
-        ues_sql_comment: true
-        default_batch_fetch_size: 1000
-    open-in-view: true
-
-  messages:
-    basename: messages, errors
-
-  #swagger error -> spring boot 2.7.x
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-
-server:
-  port: 10001
-
-logging:
-  level:
-    root: info
-    org.hibernate.SQL: debug
-
-jwt:
-  header: Authorization
-  #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
-  #echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret'|base64
-  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-  token-validity-in-seconds: 86400

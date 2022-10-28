@@ -1,4 +1,4 @@
-package com.heech.member.jwt;
+package com.heech.member.config.jwt;
 
 import lombok.*;
 
@@ -10,5 +10,6 @@ public class TokenDto {
 
     private String grantType;
     private String accessToken;
-    private Long tokenExpiresIn;
+    private Long accessTokenExpiresIn;
+    private String refreshToken;
 }

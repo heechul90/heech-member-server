@@ -1,8 +1,8 @@
 package com.heech.member.config;
 
-import com.heech.member.jwt.JwtAccessDeniedHandler;
-import com.heech.member.jwt.JwtAuthenticationEntryPoint;
-import com.heech.member.jwt.TokenProvider;
+import com.heech.member.config.jwt.JwtAccessDeniedHandler;
+import com.heech.member.config.jwt.JwtAuthenticationEntryPoint;
+import com.heech.member.config.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,22 +35,28 @@ public class WebSecurityConfig {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .csrf().disable()
+
+                //시큐리티는 기본적으로 세션을 사용하지만 여기서는 세션을 사용하지 않기 때문에 세션으로 Stateless 로 설정
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
 
+                //exception handling 할 때 만든 클래스를 추가
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDeniedHandler)
                 .and()
 
+                //로그인, 회원가입 API는 토큰이 없는 상태에서 요철이 들어오기 때문에 permitAll 설정
                 .authorizeRequests()
-                .antMatchers("/api/**").permitAll()
+                .antMatchers("/api/members/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
 
+                //JwtFilter 를 addFilterBefor 로 등록했던 JwtSecurityConfig 클래스를 적용
                 .apply(new JwtSecurityConfig(tokenProvider))
-                .and().build();
+                .and()
+                .build();
     }
 
     @Bean

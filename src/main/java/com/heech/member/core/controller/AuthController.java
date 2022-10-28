@@ -9,7 +9,7 @@ import com.heech.member.core.domain.Member;
 import com.heech.member.core.dto.MemberDto;
 import com.heech.member.core.service.AuthService;
 import com.heech.member.core.service.MemberService;
-import com.heech.member.jwt.TokenDto;
+import com.heech.member.config.jwt.TokenDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,18 +26,27 @@ public class AuthController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * 회원가입
+     */
     @PostMapping("/signup")
     public JsonResult signup(@RequestBody @Validated SignupMemberRequest request) {
         Member signupMember = authService.signup(request.toMember(passwordEncoder));
         return JsonResult.OK(new SignupMemberResponse(signupMember.getId()));
     }
 
+    /**
+     * 로그인
+     */
     @PostMapping("/login")
     public JsonResult login(@RequestBody @Validated LoginMemberRequest request) {
         TokenDto token = authService.login(request.getEmail(), request.getPassword());
         return JsonResult.OK(token);
     }
 
+    /**
+     * access token 정보 조회
+     */
     @GetMapping(value = "/info")
     public JsonResult info() {
         Member findMember = memberService.findMember(SecurityUtil.getCurrentMemberId());

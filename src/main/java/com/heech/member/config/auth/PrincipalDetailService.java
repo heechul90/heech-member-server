@@ -4,6 +4,7 @@ import com.heech.member.core.domain.Member;
 import com.heech.member.core.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,9 +29,21 @@ public class PrincipalDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("username = {}", username);
-        Member member = memberRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException(username + "은 존재하지 않는 회원입니다."));
-        return new PrincipalDetail(member);
+        return new PrincipalDetail(
+                memberRepository.findByEmail(username)
+                        .orElseThrow(() -> new UsernameNotFoundException(username + "은 존재하지 않는 회원입니다."))
+        );
+    }
+
+    //db 에 user 값이 존재한다면 UserDetails 객체로 만들어서 리턴
+    private UserDetails createUserDetails(Member member) {
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(member.getRole().name());
+
+        return new User(
+                String.valueOf(member.getId()),
+                member.getPassword(),
+                Collections.singleton(grantedAuthority)
+        );
     }
 
     private User getUser(Member findMember) {
