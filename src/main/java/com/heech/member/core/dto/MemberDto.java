@@ -13,7 +13,6 @@ public class MemberDto {
     private Long memberId;
 
     //로그인정보
-    private String username;
     private String email;
     private String name;
     private String nickname;
@@ -32,7 +31,6 @@ public class MemberDto {
     public MemberDto(Member member) {
         this.memberId = member.getId();
 
-        this.username = member.getUsername();
         this.email = member.getEmail();
         this.name = member.getName();
         this.nickname = member.getNickname();

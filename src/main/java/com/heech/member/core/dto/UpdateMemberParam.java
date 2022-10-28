@@ -20,8 +20,8 @@ public class UpdateMemberParam {
     private Role role;
 
     //개인정보
-    private String birthday;
     private Gender gender;
+    private String birthday;
     private Mobile mobile;
     private Address address;
     private String profileImage;

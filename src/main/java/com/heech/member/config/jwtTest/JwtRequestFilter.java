@@ -1,13 +1,12 @@
-package com.heech.member.config.jwt;
+package com.heech.member.config.jwtTest;
 
-import com.heech.member.core.service.AuthService;
+import com.heech.member.config.auth.PrincipalDetailService;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -20,7 +19,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    private final AuthService authService;
+    private final PrincipalDetailService principalDetailService;
 
     private final JwtTokenUtil jwtTokenUtil;
 
@@ -49,7 +48,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         // 토큰을 받으면 유효성을 검사.
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            UserDetails userDetails = this.authService.loadUserByUsername(username);
+            UserDetails userDetails = this.principalDetailService.loadUserByUsername(username);
 
             // 토큰이 유효한 경우.. 수동으로 인증을 설정하도록 Spring Security를 구성
             if ( jwtTokenUtil.validateToken(jwtToken, userDetails) ) {

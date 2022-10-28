@@ -1,4 +1,4 @@
-package com.heech.member.config.jwt;
+package com.heech.member.config.jwtTest;
 
 import com.heech.member.config.auth.PrincipalDetail;
 import com.heech.member.core.domain.Member;

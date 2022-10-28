@@ -1,10 +1,9 @@
 package com.heech.member.config.oAuth2;
 
-import com.heech.member.config.jwt.JwtTokenUtil;
+import com.heech.member.config.jwtTest.JwtTokenUtil;
 import com.heech.member.core.domain.Member;
 import com.heech.member.core.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.core.user.OAuth2User;

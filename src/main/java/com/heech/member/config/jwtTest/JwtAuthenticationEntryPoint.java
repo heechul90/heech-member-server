@@ -1,4 +1,4 @@
-package com.heech.member.config.jwt;
+package com.heech.member.config.jwtTest;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
