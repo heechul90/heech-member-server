@@ -9,7 +9,7 @@ import com.heech.member.core.domain.Member;
 import com.heech.member.core.dto.MemberDto;
 import com.heech.member.core.service.AuthService;
 import com.heech.member.core.service.MemberService;
-import com.heech.member.config.jwt.TokenDto;
+import com.heech.member.config.jwt.JwtTokenDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,7 +40,7 @@ public class AuthController {
      */
     @PostMapping("/login")
     public JsonResult login(@RequestBody @Validated LoginMemberRequest request) {
-        TokenDto token = authService.login(request.getEmail(), request.getPassword());
+        JwtTokenDto token = authService.login(request.getEmail(), request.getPassword());
         return JsonResult.OK(token);
     }
 

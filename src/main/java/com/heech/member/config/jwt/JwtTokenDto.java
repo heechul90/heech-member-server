@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class TokenDto {
+public class JwtTokenDto {
 
     private String grantType;
     private String accessToken;

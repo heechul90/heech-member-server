@@ -1,7 +1,7 @@
 package com.heech.member.config;
 
 import com.heech.member.config.jwt.JwtFilter;
-import com.heech.member.config.jwt.TokenProvider;
+import com.heech.member.config.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
-    private final TokenProvider tokenProvider;
+    private final JwtTokenProvider tokenProvider;
 
     //TokenProvider 를 주입받아서 JwtFilter 를 통해 Security 로직에 필터를 등록
     @Override

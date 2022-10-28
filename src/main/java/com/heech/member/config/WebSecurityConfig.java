@@ -2,7 +2,7 @@ package com.heech.member.config;
 
 import com.heech.member.config.jwt.JwtAccessDeniedHandler;
 import com.heech.member.config.jwt.JwtAuthenticationEntryPoint;
-import com.heech.member.config.jwt.TokenProvider;
+import com.heech.member.config.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
-    private final TokenProvider tokenProvider;
+    private final JwtTokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 

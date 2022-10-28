@@ -2,9 +2,8 @@ package com.heech.member.core.service;
 
 import com.heech.member.core.domain.Member;
 import com.heech.member.core.repository.MemberRepository;
-import com.heech.member.config.jwt.TokenDto;
-import com.heech.member.config.jwt.TokenProvider;
-import com.nimbusds.oauth2.sdk.token.RefreshToken;
+import com.heech.member.config.jwt.JwtTokenDto;
+import com.heech.member.config.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +20,7 @@ public class AuthService {
 
     private final MemberRepository memberRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-    private final TokenProvider tokenProvider;
+    private final JwtTokenProvider tokenProvider;
 
     /**
      * 회원가입
@@ -37,7 +36,7 @@ public class AuthService {
     /**
      * 로그인
      */
-    public TokenDto login(String email, String password) {
+    public JwtTokenDto login(String email, String password) {
         //email, password 기반으로 AuthenticationToken 생성
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
 

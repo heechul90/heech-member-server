@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
-public class TokenProvider implements Serializable {
+public class JwtTokenProvider implements Serializable {
 
     private static final long serialVersionUID = -2550185165626007488L;
 
@@ -36,14 +36,14 @@ public class TokenProvider implements Serializable {
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7; //7일
     private final Key key;
 
-    public TokenProvider(@Value("${jwt.secret}") String secretKey) {
+    public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
         log.info("key={}", this.key);
     }
 
     //토큰 생성
-    public TokenDto generateTokenDto(Authentication authentication) {
+    public JwtTokenDto generateTokenDto(Authentication authentication) {
         //권한 가져오기
         String authrities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -70,7 +70,7 @@ public class TokenProvider implements Serializable {
                 .compact();
         log.info("refreshToken = {}", refreshToken);
 
-        return TokenDto.builder()
+        return JwtTokenDto.builder()
                 .grantType(BEARER_TYPE)
                 .accessToken(accessToken)
                 .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
@@ -96,7 +96,7 @@ public class TokenProvider implements Serializable {
         return new UsernamePasswordAuthenticationToken(principal, "", authorities);
     }
 
-    public boolean validateToken(String token) {
+    public boolean validateJwtToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
