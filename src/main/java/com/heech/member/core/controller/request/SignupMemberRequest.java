@@ -40,7 +40,6 @@ public class SignupMemberRequest {
                 .gender(Gender.M)
                 .mobile(null)
                 .address(null)
-                .profileImage(null)
                 .build();
     }
 

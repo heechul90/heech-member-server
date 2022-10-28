@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -26,18 +27,28 @@ public class Member extends BaseTimeEntity {
 
     //로그임정보
     @Column(length = 80, unique = true, nullable = false, updatable = false)
-    private String email;
+    private String username;
     @Column(length = 60, nullable = false)
     private String password;
+
+    //개인정보1
+    @Column(length = 80, unique = true, nullable = false, updatable = false)
+    private String email;
     @Column(length = 30, nullable = false)
     private String name;
+    @Column(length = 30)
+    private String nickname;
+
+    //OAuth2 정보
+    private String provider;
+    private String providerId;
 
     //권한정보
     @Enumerated(EnumType.STRING)
     @Column(length = 15)
     private Role role;
 
-    //개인정보
+    //개인정보2
     @Column(length = 8)
     private String birthday;
     @Enumerated(EnumType.STRING)
@@ -47,46 +58,28 @@ public class Member extends BaseTimeEntity {
     private Mobile mobile;
     @Embedded
     private Address address;
-    private String profileImage;
-
-    //잠김설정
-    private boolean isLocked;
-    private int lockedCount;
-    private LocalDateTime lastLockedDate;
-
-    //휴먼계정설정
-    private boolean isDormancy;
-    private LocalDateTime lastDormancyDate;
-
-    //로그정보
-    @Column(updatable = false)
-    private LocalDateTime signupDate;
-    private LocalDateTime signinDate;
 
     //===생성===//
     /** 회원 생성 */
     @Builder(builderClassName = "createMemberBuilder", builderMethodName = "createMemberBuilder")
-    public Member(String email, String password, String name, Role role, String birthday, Gender gender, Mobile mobile, Address address, String profileImage) {
-        Assert.hasText(email, "email은 필수값입니다.");
-        Assert.hasText(password, "password는 필수값입니다.");
-        Assert.hasText(name, "name은 필수값입니다.");
+    public Member(String username, String password, String email, String name, String nickname, String provider, String providerId, Role role, String birthday, Gender gender, Mobile mobile, Address address) {
+        Assert.hasText(username, "username is required.");
+        Assert.hasText(password, "password is required.");
+        Assert.hasText(email, "email is required.");
+        Assert.hasText(name, "name is required.");
 
-        this.email = email;
+        this.username = username;
         this.password = password;
+        this.email = email;
         this.name = name;
+        this.nickname = nickname;
+        this.provider = provider;
+        this.providerId = providerId;
         this.role = role;
         this.birthday = birthday;
         this.gender = gender;
         this.mobile = mobile;
         this.address = address;
-        this.profileImage = profileImage;
-        this.isLocked = false;
-        this.lockedCount = 0;
-        this.lastLockedDate = null;
-        this.isDormancy = false;
-        this.lastDormancyDate = null;
-        this.signupDate = LocalDateTime.now();
-        this.signinDate = LocalDateTime.now();
     }
 
     /** 회원 수정 */
@@ -97,7 +90,6 @@ public class Member extends BaseTimeEntity {
         this.gender = param.getGender() != null ? param.getGender() : null;
         this.mobile = param.getMobile() != null ? param.getMobile() : null;
         this.address = param.getAddress() != null ? param.getAddress() : null;
-        this.profileImage = hasText(param.getProfileImage()) ? param.getProfileImage() : null;
     }
 
     //===변경===//

@@ -18,6 +18,8 @@ import java.util.List;
 public class CreateMemberRequest {
 
     //로그인정보
+    @NotBlank
+    private String username;
     @NotBlank(message = "이메일을 입력하세요.")
     //@Email
     private String email;
@@ -25,6 +27,7 @@ public class CreateMemberRequest {
     private String password;
     @NotBlank(message = "이름을 입력하세요.")
     private String name;
+    private String nickname;
 
     //권한정보
     @NotNull
@@ -67,7 +70,6 @@ public class CreateMemberRequest {
                 .gender(this.gender)
                 .mobile(new Mobile(this.phoneNumberFirst, this.phoneNumberMiddle, this.phoneNumberLast))
                 .address(new Address(this.zipcode, this.address, this.addressDetail))
-                .profileImage(this.profileImage)
                 .build();
     }
 

@@ -72,8 +72,7 @@ public class MemberController {
      * 멤버 수정
      */
     @PutMapping(value = "/{memberId}")
-    public JsonResult updateMember(@PathVariable("memberId") Long memberId,
-                                   @RequestBody @Validated UpdateMemberRequest request) {
+    public JsonResult updateMember(@PathVariable("memberId") Long memberId, @RequestBody @Validated UpdateMemberRequest request) {
 
         //validate
         request.validate();

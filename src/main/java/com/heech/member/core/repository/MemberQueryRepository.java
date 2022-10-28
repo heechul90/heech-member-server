@@ -47,9 +47,7 @@ public class MemberQueryRepository {
                 .from(member)
                 .where(
                         searchCondition(condition.getSearchCondition(), condition.getSearchKeyword()),
-                        searchGenderEq(condition.getSearchGender()),
-                        searchIsLockedEq(condition.getSearchIsLocked()),
-                        searchIsMormancyEq(condition.getSearchIsDormancy())
+                        searchGenderEq(condition.getSearchGender())
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -66,9 +64,7 @@ public class MemberQueryRepository {
                 .from(member)
                 .where(
                         searchCondition(condition.getSearchCondition(), condition.getSearchKeyword()),
-                        searchGenderEq(condition.getSearchGender()),
-                        searchIsLockedEq(condition.getSearchIsLocked()),
-                        searchIsMormancyEq(condition.getSearchIsDormancy())
+                        searchGenderEq(condition.getSearchGender())
                 );
     }
 
@@ -94,39 +90,5 @@ public class MemberQueryRepository {
      */
     private BooleanExpression searchGenderEq(Gender searchGender) {
         return searchGender == null ? null : member.gender.eq(searchGender);
-    }
-
-    /**
-     * where isLocked == searchIsLocked
-     */
-    private BooleanExpression searchIsLockedEq(String searchIsLocked) {
-        if (!hasText(searchIsLocked)) {
-            return null;
-        }
-
-        if ("Y".equals(searchIsLocked)) {
-            return member.isLocked.eq(true);
-        } else if ("N".equals(searchIsLocked)) {
-            return member.isLocked.eq(false);
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * where isDormancy == searchIsDormancy
-     */
-    private BooleanExpression searchIsMormancyEq(String searchIsDormancy) {
-        if (!hasText(searchIsDormancy)) {
-            return null;
-        }
-
-        if ("Y".equals(searchIsDormancy)) {
-            return member.isDormancy.eq(true);
-        } else if ("N".equals(searchIsDormancy)) {
-            return member.isDormancy.eq(false);
-        } else {
-            return null;
-        }
     }
 }

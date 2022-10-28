@@ -32,9 +32,11 @@ import static org.mockito.Mockito.verify;
 class MemberServiceTest {
 
     //CREATE_MEMBER
-    public static final String EMAIL = "test_mail@main.com";
+    private static final String USERNAME = "test_username";
     public static final String PASSWORD = "test_password";
+    public static final String EMAIL = "test_mail@main.com";
     public static final String NAME = "test_name";
+    public static final String NICKNAME = "test_nickname";
     public static final Role ROLE = Role.ROLE_USER;
     public static final String BIRTHDAY = "19901009";
     public static final Gender GENDER = Gender.M;
@@ -43,6 +45,7 @@ class MemberServiceTest {
 
     //UPDATE_MEMBER
     public static final String UPDATE_NAME = "update_name";
+    public static final String UPDATE_NICKNAME = "update_nickname";
     public static final Role UPDATE_ROLE = Role.ROLE_ADMIN;
     public static final String UPDATE_BIRTHDAY = "19921009";
     public static final Gender UPDATE_GENDER = Gender.F;
@@ -63,11 +66,13 @@ class MemberServiceTest {
 
     @Mock MemberRepository memberRepository;
 
-    private Member getMember(String email, String password, String name, Role role, String birthday, Gender gender, Mobile mobile, Address address) {
+    private Member getMember(String username, String password, String email,  String name, String nickname, Role role, String birthday, Gender gender, Mobile mobile, Address address) {
         return Member.createMemberBuilder()
-                .email(email)
+                .username(username)
                 .password(password)
+                .email(email)
                 .name(name)
+                .nickname(nickname)
                 .role(role)
                 .birthday(birthday)
                 .gender(gender)
@@ -82,7 +87,7 @@ class MemberServiceTest {
         //given
         List<Member> members = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
-            members.add(getMember(EMAIL, PASSWORD, NAME + i, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS));
+            members.add(getMember(USERNAME, PASSWORD, EMAIL, NAME + i, NICKNAME, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS));
         }
         given(memberQueryRepository.findMembers(any(), any())).willReturn(new PageImpl(members));
 
@@ -105,7 +110,7 @@ class MemberServiceTest {
     @DisplayName("멤버 단건 조회")
     void findMember() {
         //given
-        Member member = getMember(EMAIL, PASSWORD, NAME, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS);
+        Member member = getMember(USERNAME, PASSWORD, EMAIL, NAME, NICKNAME, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS);
         given(memberRepository.findById(any(Long.class))).willReturn(Optional.ofNullable(member));
 
         //when
@@ -142,7 +147,7 @@ class MemberServiceTest {
     @DisplayName("멤버 저장")
     void saveMember() {
         //given
-        Member member = getMember(EMAIL, PASSWORD, NAME, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS);
+        Member member = getMember(USERNAME, PASSWORD, EMAIL, NAME, NICKNAME, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS);
         given(memberRepository.save(any(Member.class))).willReturn(member);
 
         //when
@@ -166,7 +171,7 @@ class MemberServiceTest {
     @DisplayName("멤버 수정")
     void updateMember() {
         //given
-        Member member = getMember(EMAIL, PASSWORD, NAME, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS);
+        Member member = getMember(USERNAME, PASSWORD, EMAIL, NAME, NICKNAME, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS);
         given(memberRepository.findById(any(Long.class))).willReturn(Optional.ofNullable(member));
 
         UpdateMemberParam param = UpdateMemberParam.builder()
@@ -190,7 +195,6 @@ class MemberServiceTest {
         assertThat(member.getBirthday()).isEqualTo(UPDATE_BIRTHDAY);
         assertThat(member.getGender()).isEqualTo(UPDATE_GENDER);
         assertThat(member.getAddress()).isEqualTo(UPDATE_ADDRESS);
-        assertThat(member.getProfileImage()).isEqualTo(UPDATE_PROFILE_IMAGE);
 
         //verify
         verify(memberRepository, times(1)).findById(any(Long.class));
@@ -213,7 +217,7 @@ class MemberServiceTest {
     @DisplayName("멤버 삭제")
     void deleteMember() {
         //given
-        Member member = getMember(EMAIL, PASSWORD, NAME, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS);
+        Member member = getMember(USERNAME, PASSWORD, EMAIL, NAME, NICKNAME, ROLE, BIRTHDAY, GENDER, MOBILE, ADDRESS);
         given(memberRepository.findById(any(Long.class))).willReturn(Optional.ofNullable(member));
 
         //when
